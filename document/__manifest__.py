@@ -8,9 +8,7 @@
     "category": "General",
     "version": "14.0.1.0.0",
     # necessary modules
-    "depends": [
-        "mail",
-    ],
+    "depends": ["mail",],
     # always load
     "data": [
         "security/ir.model.access.csv",

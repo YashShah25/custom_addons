@@ -6,9 +6,7 @@
     "summary": """This module will demonstrate all special commands""",
     "description": "This module provides total analyses of your all orders",
     "depends": ["college"],
-    "data": [
-        "view/order_views.xml",
-    ],
+    "data": ["view/order_views.xml",],
     "demo": [],
     "sequence": 2,
     "application": True,

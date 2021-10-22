@@ -9,8 +9,8 @@
     "license": "AGPL-3",
     "data": [
         "data/product_menu.xml",
-	    "views/assets.xml",
-	    "views/contact_template_list.xml",
+        "views/assets.xml",
+        "views/contact_template_list.xml",
         "views/contact_info_template.xml",
     ],
     "auto_install": False,

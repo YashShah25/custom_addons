@@ -9,11 +9,7 @@ class SchoolProfile(models.Model):
 
     # _rec_name = "name"
 
-    name = fields.Char(
-        string="School name",
-        help="Write a school name",
-        index=True,
-    )
+    name = fields.Char(string="School name", help="Write a school name", index=True,)
     type = fields.Selection(
         [("public", "Public"), ("private", "Private")], string="Type"
     )

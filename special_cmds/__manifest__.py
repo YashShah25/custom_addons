@@ -6,12 +6,8 @@
     "sequence": 1,
     "website": "https://www.aktivesoftware.com/",
     "description": "commands",
-    "depends": [
-        "sale_management",
-    ],
-    "data": [
-        "views/sale_order_inherit_views.xml",
-    ],
+    "depends": ["sale_management",],
+    "data": ["views/sale_order_inherit_views.xml",],
     "demo": [],
     "installable": True,
     "auto_install": False,

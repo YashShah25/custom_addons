@@ -7,9 +7,7 @@
     "category": "Business",
     "version": "14.0.1.0.0",
     "depends": ["sale_management", "stock"],
-    "data": [
-        "report/report.xml",
-    ],
+    "data": ["report/report.xml",],
     "application": True,
     "installable": True,
     "auto_install": False,

@@ -7,9 +7,7 @@
     "category": "Education/College",
     "author": "Yash Shah",
     "website": "https://www.google.com/",
-    "depends": [
-        "website_sale",
-    ],
+    "depends": ["website_sale",],
     "data": [
         "security/ir.model.access.csv",
         "views/college_view.xml",

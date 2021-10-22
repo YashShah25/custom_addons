@@ -49,11 +49,7 @@ class DocumenterItem(models.Model):
         tracking=True,
         domain=[("application", "=", True)],
     )
-    models = fields.Many2many(
-        "ir.model",
-        string=_("Models"),
-        tracking=True,
-    )
+    models = fields.Many2many("ir.model", string=_("Models"), tracking=True,)
     views = fields.Many2many(
         "ir.ui.view",
         string=_("Views"),

@@ -10,14 +10,9 @@
     "category": "hr",
     "version": "14.0.1.0.0",
     # any module necessary for this one to work correctly
-    "depends": [
-        "hr_recruitment",
-    ],
+    "depends": ["hr_recruitment",],
     # always loaded
-    "data": [
-        "security/ir.model.access.csv",
-        "views/hr_ref_app_views.xml",
-    ],
+    "data": ["security/ir.model.access.csv", "views/hr_ref_app_views.xml",],
     "installable": True,
     "application": True,
     "auto_install": False,

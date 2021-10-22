@@ -7,9 +7,7 @@
     "version": "14.0.1.0.0",
     "depends": ["website"],
     "license": "AGPL-3",
-    "data": [
-        "views/demo_template.xml",
-    ],
+    "data": ["views/demo_template.xml",],
     "auto_install": False,
     "installable": True,
     "application": True,

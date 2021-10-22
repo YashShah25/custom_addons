@@ -7,9 +7,7 @@
     "version": "14.0.1.0.0",
     "depends": ["base"],
     "license": "AGPL-3",
-    "data": [
-        "data/product_menu.xml",
-    ],
+    "data": ["data/product_menu.xml",],
     "auto_install": False,
     "installable": True,
     "application": True,

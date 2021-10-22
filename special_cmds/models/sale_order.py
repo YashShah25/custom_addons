@@ -4,7 +4,9 @@ from odoo import _, api, fields, models
 class SaleOrder(models.Model):
     _inherit = "sale.order"
 
-    custom_partner_ids = fields.Many2many("res.partner", "res_partner_rel", "res_id", "partner_id", string="Partner")
+    custom_partner_ids = fields.Many2many(
+        "res.partner", "res_partner_rel", "res_id", "partner_id", string="Partner"
+    )
 
     def update_m2m_button(self):
         print("\n\n\n\n\n UPDATE M2m BUTTON")

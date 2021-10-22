@@ -10,8 +10,9 @@ class MySettings(models.TransientModel):
 
     def _get_domain(self):
         _, num_days = calendar.monthrange(datetime.now().year, datetime.now().month)
-        first_day, last_day = datetime.today().replace(day=1), datetime.today().replace(
-            day=num_days
+        first_day, last_day = (
+            datetime.today().replace(day=1),
+            datetime.today().replace(day=num_days),
         )
         partners = (
             self.env["sale.order"]
@@ -40,13 +41,10 @@ class MySettings(models.TransientModel):
         res = super(MySettings, self).get_values()
         active = self.env["ir.config_parameter"].get_param("college.active")
         partner_ids = self.env["ir.config_parameter"].get_param("college.partner_ids")
-        res.update(
-            active=active,
-        )
+        res.update(active=active,)
         if partner_ids:
             res.update(
-                active=active,
-                partner_ids=[(6, 0, literal_eval(partner_ids))],
+                active=active, partner_ids=[(6, 0, literal_eval(partner_ids))],
             )
         return res
 

@@ -6,10 +6,7 @@
     "summary": """This module manage all orders""",
     "description": "This module provides total analyses of your all orders",
     "depends": ["college"],
-    "data": [
-        "security/ir.model.access.csv",
-        "view/sale_views.xml",
-    ],
+    "data": ["security/ir.model.access.csv", "view/sale_views.xml",],
     "demo": [],
     "sequence": 2,
     "application": True,

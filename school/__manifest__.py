@@ -6,10 +6,7 @@
     "sequence": 1,
     "website": "https://www.aktivesoftware.com/",
     "description": "This module gives a framework for SMS text messaging",
-    "depends": [
-        "mail",
-        "sale_management",
-    ],
+    "depends": ["mail", "sale_management",],
     "data": [
         "security/ir.model.access.csv",
         "data/school_data.xml",

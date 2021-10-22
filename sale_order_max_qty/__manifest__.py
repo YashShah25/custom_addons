@@ -6,10 +6,7 @@
     "sequence": 1,
     "website": "https://www.aktivesoftware.com/",
     "description": "This module gives a framework project management",
-    "depends": [
-        "sale_management",
-        "purchase",
-    ],
+    "depends": ["sale_management", "purchase",],
     "data": [
         "views/product_views.xml",
         "views/sale_views.xml",
