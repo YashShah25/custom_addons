@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+	<template id="contact_data" name="contact data">
+		<t t-call="website.layout">
+			<t t-set="title">Contact Data</t>
+			<!--			<div>-->
+			<div>
+				<div>id</div>
+				<div class="my_flex">
+					<div style="width: 50%; height: 400%">
+						<span t-esc="contact.name"/>
+					</div>
+					<div style="width: 50%; height: 40%">d</div>
+				</div>
+				<div class="my_flex">
+					<div style="width: 50%; height: 60%">f</div>
+					<div style="width: 50%; height: 60%">f</div>
+				</div>
+			</div>
+			<!--			</div>-->
+		</t>
+	</template>
+</odoo>
+

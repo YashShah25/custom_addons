@@ -1,0 +1,15 @@
+{
+    "name": "Cron Demo",
+    "author": "Yash Shah",
+    "summary": "This module will demonstrate the working of cron",
+    "description": "This application will help to understand the working of cron.",
+    "website": "https://www.cron.com",
+    "category": "Business",
+    "version": "14.0.1.0.0",
+    "depends": ["sale_management"],
+    "data": ["data/my_cron_demo.xml"],
+    "application": True,
+    "auto_install": False,
+    "installable": True,
+    "sequence": "1",
+}

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+	<template id="random_string_label_report" inherit_id="product.report_producttemplatelabel">
+		<xpath expr="//div[@class='page']" position="after">
+			<h2>Random String</h2>
+			<div t-field="docs.random_string"/>
+		</xpath>
+	</template>
+
+	<template id="random_string_barcode_report" inherit_id="product.report_producttemplatebarcode">
+		<xpath expr="//div[@class='page']" position="after">
+			<h2>Random String</h2>
+			<div t-field="docs.random_string"/>
+		</xpath>
+	</template>
+</odoo>
+

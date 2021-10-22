@@ -1,0 +1,81 @@
+.my_flex {
+    display: flex;
+}
+.flex_container {
+    margin: 2px;
+    border-radius: 5px;
+    align-items: center;
+    background-color: #fff;
+    padding: 3px;
+    flex-wrap: wrap;
+}
+.flex_container_form {
+    margin: 10px 20px;
+    padding: 20px 10px;
+    justify-content: space-around;
+    border: 2px solid black;
+    border-radius: 8px;
+    background-color: #fff;
+    flex-wrap: wrap;
+}
+.flex_container_list {
+    flex-wrap: wrap;
+    justify-content: center;
+    background-color: #5f5e97;
+}
+.my_product_image_wrapper{
+    width: 80px;
+    border-radius: 5px;
+    margin: 10px 15px;
+}
+.my_product_image{
+    padding: 5px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 70%;
+}
+div.height {
+    height: 450px;
+}
+.overflow {
+    overflow: auto;
+}
+h3.position_price{
+    margin-top: 10px;
+    text-align: right;
+}
+a:hover {
+    background-color: lightgrey;
+    text-decoration: none;
+}
+.radio_item_img {
+    padding: 1px;
+    margin: 1px;
+    width: 55px;
+}
+.radio_item_img:hover {
+    width: 55px;
+    border: solid;
+}
+.radio_input {
+  display: none !important;
+}
+
+.radio_input:checked + label{
+  opacity: 1;
+  border: double;
+}
+
+.radio_item_div {
+    padding: 1px;
+    margin: 1px;
+    width: 42px;
+    height: 42px;
+    border: solid lightgrey;
+}
+.radio_item_div:hover {
+    width: 44px;
+    height: 44px;
+    border: solid black;
+}

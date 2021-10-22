@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+	<record id="college_tree_view" model="ir.ui.view">
+		<field name="name">college tree</field>
+		<field name="model">college.profile</field>
+		<field name="arch" type="xml">
+			<tree multi_edit="1">
+				<field name="var_cls"/>
+			</tree>
+		</field>
+	</record>
+
+	<record id="college_form_view" model="ir.ui.view">
+		<field name="name">college form</field>
+		<field name="model">college.profile</field>
+		<field name="arch" type="xml">
+			<form>
+				<group>
+					<group>
+						<field name="var_cls"/>
+						<field name="no"/>
+					</group>
+				</group>
+			</form>
+		</field>
+	</record>
+
+	<record id="action_college_profile" model="ir.actions.act_window">
+		<field name="name">College Profile</field>
+		<field name="res_model">college.profile</field>
+		<field name="view_mode">tree,form</field>
+	</record>
+
+	<menuitem id="college_root_menu" name="College"/>
+
+	<menuitem id="college_sub_menu" parent="college_root_menu" name="College Sub"/>
+
+	<menuitem id="college_profile_menu" action="action_college_profile" parent="college_sub_menu"/>
+
+</odoo>

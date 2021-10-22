@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<odoo>
+	<template id="qty_order_field_add" inherit_id="sale.report_saleorder_document">
+		<xpath expr="//t[@t-call='web.external_layout']/div[hasclass('page')]/table[hasclass('o_main_table')]
+		/thead/tr/th[@name='th_description']" position="after">
+			<th name="Tracking" class="text-right">Tracking</th>
+		</xpath>
+
+		<xpath expr="//t[@t-call='web.external_layout']/div[hasclass('page')]/table[hasclass('o_main_table')]
+		/tbody[hasclass('sale_tbody')]/t[@t-as='line']/tr/t[@t-if='not line.display_type']/td[@name='td_name']"
+			   position="after">
+			<t t-if="line.product_id.tracking != 'none'">
+				<td name="td_qty_order" class="text-center">
+					<span t-field="line.product_id.tracking"/>
+				</td>
+			</t>
+			<t t-else="">
+				<td></td>
+			</t>
+		</xpath>
+
+		<xpath expr="//t[@t-call='web.external_layout']/div[hasclass('page')]/table[hasclass('o_main_table')]"
+			   position="after">
+			<table id="partners_list">
+				<thead>
+					<tr>
+						<th>Name</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr t-foreach="students_list" t-as="stu">
+						<td name="stu"/>
+					</tr>
+				</tbody>
+			</table>
+		</xpath>
+
+	</template>
+</odoo>
+
+
+

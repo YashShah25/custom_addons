@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+	<template id="product_detail_list">
+		<t t-call="website.layout">
+			<t t-set="title">Product List</t>
+			<div class="oe_structure my_flex flex_container_list">
+				<t t-foreach="product_list" t-as="product_data">
+					<a t-attf-href="/product/info/#{product_data.id}" class="my_flex flex_container col-sm-5 col-md-3">
+						<div>
+							<span class="my_flex my_product_image_wrapper" t-field="product_data.image_1920" t-options='{"widget":"image"}'/>
+						</div>
+						<div>
+							<h5>
+								<t t-esc="product_data.name"/>
+							</h5>
+							<span t-esc="product_data.list_price" t-options="{'widget': 'monetary', 'display_currency': website.currency_id}"/>
+						</div>
+					</a>
+				</t>
+			</div>
+		</t>
+	</template>
+</odoo>

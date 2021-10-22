@@ -1,0 +1,16 @@
+<odoo>
+	<record id="my_cron_demo" model="ir.cron">
+		<field name="name">My Demo Cron Job</field>
+		<field name="model_id" ref="model_sale_order"/>
+		<field name="state">code</field>
+		<field name="code">model.my_cron()</field>
+		<field name="user_id" ref="base.user_root"/>
+		<field name='interval_number'>1</field>
+		<field name='interval_type'>minutes</field>
+		<field name="numbercall">2</field>
+<!--		<field name="nextcall" eval="(datetime.now())"/>-->
+<!--		<field name="doall" eval="False"/>-->
+<!--		<field name="priority" eval="0"/>-->
+<!--		<field name="active" eval="False"/>-->
+	</record>
+</odoo>

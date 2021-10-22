@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_doc_item,access_doc_item,document.model_doc_item,base.group_user,1,1,1,1
+access_doc_tags,access_doc_tags,document.model_doc_tags,base.group_user,1,1,1,1
+access_doc_version,access_doc_version,document.model_doc_version,base.group_user,1,1,1,1
+access_report_document_document_detail_report,access_report_document_document_detail_report,model_report_document_document_detail_report,base.group_user,1,1,1,1

@@ -1,0 +1,12 @@
+<odoo>
+    <template id="demo_page" name="Demo page">
+        <t t-call="website.layout">
+            <t t-set="title">Demo Page</t>
+            <div class="oe_structure">
+                <div class="container">
+                    Hello from demo page
+                </div>
+            </div>
+        </t>
+    </template>
+</odoo>

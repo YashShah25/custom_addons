@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<odoo>
+    <record id="mail_wizard_form_view" model="ir.ui.view">
+        <field name="name">sale.order.form.inherit</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//header/button[@name='action_cancel']" position="after">
+                <button name="update_m2m_button" string="update M2M"
+                        class="oe_highlight" type="object"/>
+            </xpath>
+            <field name="name" position="after">
+                <group>
+                    <field name="custom_partner_ids" widget="many2many_tags"/>
+                </group>
+            </field>
+        </field>
+    </record>
+</odoo>

@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<odoo>
+    <record id="hr_ref_app_list_view1" model="ir.ui.view">
+        <field name="name">hr.referral.app.tree.view</field>
+        <field name="model">hr.referral.application</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field class="text-danger" name="name"/>
+                <field name="email"/>
+                <field name="referral_id"/>
+                <field name="degree_id"/>
+                <field name="department_id"/>
+                <field name="currency_id" invisible="1"/>
+                <field name="expected_salary" widget="monetary"/>
+                <field name="expected_joining_date"/>
+                <field name="state" decoration-warning="state == 'draft'" decoration-success="state == 'approved'"
+                       decoration-danger="state == 'cancel'" widget="badge"
+                       optional="show"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="hr_ref_app_form_view1" model="ir.ui.view">
+        <field name="name">hr.referral.app.form.view</field>
+        <field name="model">hr.referral.application</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button id="button_approve" name="action_approved" string="Approve"
+                            class="btn btn-success" type="object" states="draft"/>
+
+                    <button id="button_createapp" name="action_createapp" string="Create Application"
+                            class="btn btn-primary" type="button" states="approved"/>
+
+                    <button id="button_cancel" name="action_cancel" string="Cancel"
+                            class="btn btn-danger" type="object" states="approved,draft"/>
+
+                    <button id="button_draft" name="action_draft" string="Draft"
+                            class="btn btn-warning" type="object" states="cancel"/>
+                    <field name="state" widget="statusbar"
+                           statusbar_visible="draft,approved,cancel"/>
+                </header>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="email" widget="email"/>
+                            <field name="referral_id"/>
+                            <field name="degree_id"/>
+                            <field name="department_id"/>
+                            <field name="currency_id" invisible="1"/>
+                            <field name="expected_salary" widget="monetary"/>
+                            <field name="expected_joining_date"/>
+                            <field name="summary"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+
+    <record id="hr_ref_app_search_view" model="ir.ui.view">
+        <field name="name">hr.ref.app.search.view</field>
+        <field name="model">hr.referral.application</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+                <field name="email"/>
+                <field name="referral_id"/>
+                <field name="degree_id"/>
+                <field name="department_id"/>
+                <field name="expected_salary"/>
+                <separator/>
+                <filter name="State" string="Status Draft" domain="[('state', '=', 'draft')]"/>
+                <filter name="State" string="Status Approved" domain="[('state', '=', 'confirm')]"/>
+                <filter name="State" string="Status Canceled" domain="[('state', '=', 'cancel')]"/>
+                <separator/>
+                <group string="Group By">
+                    <filter string="Degree" name="degree_id" context="{'group_by':'degree_id'}"/>
+                    <filter string="Expected Salary" name="expected_salary"
+                            context="{'group_by':'expected_salary'}"/>
+                    <filter string="Expected Joining Date" name="expected_joining_date"
+                            context="{'group_by':'expected_joining_date'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+
+    <record id="action_hr_referral_application" model="ir.actions.act_window">
+        <field name="name">Hr Form</field>
+        <field name="res_model">hr.referral.application</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem id="hr_referral_application_root_menu" name="Hr Referral"/>
+    <menuitem name="Hr Ref Form" id="hr_ref_app_menu" action="action_hr_referral_application"
+              parent="hr_referral_application_root_menu"/>
+
+</odoo>
+
+

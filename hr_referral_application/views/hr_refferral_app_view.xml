@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+	<record id="hr_refferral_tree_view" model="ir.ui.view">
+		<field name="name">hr refferral tree view</field>
+		<field name="model">hr.referral</field>
+		<field name="arch" type="xml">
+			<tree>
+				<!--				<field name="name" decoration-bf="name"/>-->
+				<field name="name" decoration-it="name"/>
+				<field name="email" widget="email"/>
+				<field name="referral_name"/>
+				<field name="department"/>
+				<field name="expected_joining_date"/>
+				<field name="state" decoration-warning="state == 'draft'" decoration-success="state == 'approved'"
+					   decoration-danger="state == 'cancel'" widget="badge"
+					   optional="show"/>
+			</tree>
+		</field>
+	</record>
+	<record id="hr_refferral_form_view" model="ir.ui.view">
+		<field name="name">hr refferral form view</field>
+		<field name="model">hr.referral</field>
+		<field name="arch" type="xml">
+			<form>
+				<header>
+					<button id="button_confirm" name="action_confirm" string="Approve"
+							class="btn btn-primary" type="object" states="draft"/>
+					<button id="button_cancel" name="action_cancel" string="Cancel"
+							class="btn btn-primary" type="object"/>
+					<field name="state" widget="statusbar"
+						   statusbar_visible="draft,confirm,cancel"/>
+				</header>
+				<sheet>
+					<group>
+						<div>
+							<group>
+								<field name="name"/>
+								<field name="email" widget="email"/>
+							</group>
+							<group>
+								<field name="currency_id"/>
+								<field name="expected_salary" widget="monetary"/>
+								<field name="expected_joining_date"/>
+							</group>
+						</div>
+						<div>
+							<group>
+								<field name="referral_name" widget="Many2one" options="{'no_create': True}"/>
+								<field name="degree" widget="selection"/>
+								<field name="department" widget="selection"/>
+
+							</group>
+						</div>
+					</group>
+					<group>
+						<field name="summary"/>
+					</group>
+				</sheet>
+			</form>
+		</field>
+	</record>
+	<record id="action_hr_refferral" model="ir.actions.act_window">
+		<field name="name">hr refferral</field>
+		<field name="res_model">hr.referral</field>
+		<field name="view_mode">tree,form</field>
+	</record>
+	<record id="search_hr_referral_item" model="ir.ui.view">
+		<field name="name">search.hr.referral</field>
+		<field name="model">hr.referral</field>
+		<field name="arch" type="xml">
+			<search>
+				<field name="name"/>
+				<field name="email"/>
+				<field name="referral_name"/>
+				<separator/>
+				<filter name="State" string="Status Draft" domain="[('state', '=', 'draft')]"/>
+				<filter name="State" string="Status Approved" domain="[('state', '=', 'confirm')]"/>
+				<filter name="State" string="Status Canceled" domain="[('state', '=', 'cancel')]"/>
+				<separator/>
+				<group string="Group By">
+					<filter string="Group by Degree" name="degree" context="{'group_by':'degree'}"/>
+					<filter string="Group by Expected Salary" name="expected_salary" context="{'group_by':'expected_salary'}"/>
+					<filter string="Group by Expected Joining Date" name="expected_joining_date" context="{'group_by':'expected_joining_date'}"/>
+				</group>
+			</search>
+		</field>
+	</record>
+	<menuitem id="hr_referral_root_menu" name="hr_referral"/>
+	<menuitem id="hr_referral_sub_menu" parent="hr_referral_root_menu" name="HR referral sub"/>
+	<menuitem id="hr_referral_menu" action="action_hr_refferral" parent="hr_referral_sub_menu"/>
+</odoo>

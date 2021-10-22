@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<odoo>
+	<record id="document_list_view" model="ir.ui.view">
+		<field name="name">document.list.view</field>
+		<field name="model">doc.version</field>
+		<field name="arch" type="xml">
+			<tree>
+				<field name="name"/>
+			</tree>
+		</field>
+	</record>
+
+	<record id="document_form_view" model="ir.ui.view">
+		<field name="name">document.form.view</field>
+		<field name="model">doc.version</field>
+		<field name="arch" type="xml">
+			<form>
+				<sheet>
+<!--					<button type="object" name="unlink" class="btn btn-primary" style="margin:5px;">Delete</button>-->
+<!--					<button type="object" name="clear_record" class="btn btn-outline-primary" style="margin:5px;">Clear</button>-->
+					<group>
+						<group>
+							<field name="name"/>
+							<field name="active" widget="boolean_toggle"/>
+						</group>
+					</group>
+				</sheet>
+			</form>
+		</field>
+	</record>
+
+	<record id="doc_version_search_view" model="ir.ui.view">
+		<field name="name">doc_version.search.view</field>
+		<field name="model">doc.version</field>
+		<field name="arch" type="xml">
+			<search>
+				<field name="name"/>
+				<separator/>
+				<filter name="archived" string="Archived" domain="[('active', '=', False)]"/>
+			</search>
+		</field>
+	</record>
+
+	<record id="action_doc_version" model="ir.actions.act_window">
+		<field name="name">Doc Version</field>
+		<field name="res_model">doc.version</field>
+		<field name="view_mode">tree,form</field>
+	</record>
+
+	<menuitem id="document_sub3" name="Document Version" parent="yash_root" action="action_doc_version"/>
+
+</odoo>

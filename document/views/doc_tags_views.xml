@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<odoo>
+	<record id="doc_tags_list_view" model="ir.ui.view">
+		<field name="name">document.list.view</field>
+		<field name="model">doc.tags</field>
+		<field name="arch" type="xml">
+			<tree>
+				<field name="name"/>
+			</tree>
+		</field>
+	</record>
+
+	<record id="doc_tags_form_view" model="ir.ui.view">
+		<field name="name">doc_tags.form.view</field>
+		<field name="model">doc.tags</field>
+		<field name="arch" type="xml">
+			<form>
+				<sheet>
+					<group>
+						<group>
+							<field name="name"/>
+							<field name="active" widget="boolean_toggle"/>
+						</group>
+					</group>
+				</sheet>
+			</form>
+		</field>
+	</record>
+
+	<record id="doc_tags_search_view" model="ir.ui.view">
+		<field name="name">doc_tags.search.view</field>
+		<field name="model">doc.tags</field>
+		<field name="arch" type="xml">
+			<search>
+				<field name="name"/>
+				<separator/>
+				<filter name="archived" string="Archived" domain="[('active', '=', False)]"/>
+			</search>
+		</field>
+	</record>
+
+		<record id="action_doc_tags" model="ir.actions.act_window">
+		<field name="name">Doc Tags</field>
+		<field name="res_model">doc.tags</field>
+		<field name="view_mode">tree,form</field>
+	</record>
+
+	<menuitem id="yash_sub2" name="Document Tag" parent="yash_root" action="action_doc_tags"/>
+
+</odoo>

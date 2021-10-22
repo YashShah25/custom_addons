@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+	<template id="website_inherites_view" inherit_id="website_sale.product">
+		<xpath expr="//a[@id='add_to_cart']" position="after">
+			<div>
+				<p t-esc="datetime.datetime.now().strftime('%Y-%m-%d')" t-options="{'widget': 'date'}" class="m-0"/>
+			</div>
+		</xpath>
+
+	</template>
+
+
+</odoo>

@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+	<record id="yash_list_views" model="ir.ui.view">
+		<field name="name">document.list.view</field>
+		<field name="model">doc.item</field>
+		<field name="arch" type="xml">
+			<tree>
+				<field name="name"/>
+				<!--				<field name="item_type"/>-->
+				<!--				<field name="tags" widget="many2many_tags"/>-->
+				<!--				<field name="ver_id"/>-->
+				<!--				<field name="description_short"/>-->
+			</tree>
+		</field>
+	</record>
+
+	<record id="doc_item_form_views" model="ir.ui.view">
+		<field name="name">doc_item.form.views</field>
+		<field name="model">doc.item</field>
+		<field name="arch" type="xml">
+			<form>
+				<sheet>
+					<group>
+						<group>
+							<field name="name"/>
+							<field name="language"/>
+							<field name="lan_count" attrs="{'invisible': [('lan_count', '&lt;', 2)]}"/>
+							<field name="description_short"/>
+						</group>
+					</group>
+
+					<group>
+						<group>
+							<field name="ver_id"/>
+							<field name="tags" widget="many2many_tags" options="{'color_field': 'color'}"/>
+							<field name="item_type" widget="radio"/>
+							<field name="active"/>
+						</group>
+					</group>
+					<group>
+						<field name="video_url" placeholder="https://www.youtube.com/" widget="url"/>
+						<field name="google_doc_url" placeholder="https://www.google.com/" widget="url"/>
+					</group>
+					<group>
+						<group>
+							<field name="description_long"/>
+						</group>
+					</group>
+					<div class="oe_chatter">
+						<field name="message_follower_ids"/>
+						<field name="message_ids"/>
+						<field name="activity_ids"/>
+					</div>
+				</sheet>
+			</form>
+		</field>
+	</record>
+
+	<record id="search_doc_item" model="ir.ui.view">
+		<field name="name">search.doc.item</field>
+		<field name="model">doc.item</field>
+		<field name="arch" type="xml">
+			<search>
+				<field name="name"/>
+				<field name="tags"/>
+				<field name="ver_id"/>
+				<field name="video_url"/>
+				<field name="google_doc_url"/>
+				<separator/>
+				<filter name="item_type" string="Documentation" domain="[('item_type', '=', 'documentation')]"/>
+				<filter name="item_type" string="Tipp" domain="[('item_type', '=', 'tipp')]"/>
+				<filter name="item_type" string="Customer" domain="[('item_type', '=', 'customer')]"/>
+				<filter name="item_type" string="Automation" domain="[('item_type', '=', 'automation')]"/>
+				<filter name="item_type" string="Technical" domain="[('item_type', '=', 'technical')]"/>
+				<filter name="item_type" string="Configuration" domain="[('item_type', '=', 'configuration')]"/>
+				<separator/>
+				<filter name="archived" string="Archived" domain="[('active', '=', False)]"/>
+				<group string="Group By">
+					<filter string="Version" name="ver_id" context="{'group_by':'ver_id'}"/>
+					<filter string="Type" name="item_type" context="{'group_by':'item_type'}"/>
+				</group>
+
+			</search>
+		</field>
+	</record>
+
+	<record id="action_doc_item" model="ir.actions.act_window">
+		<field name="name">Doc Item</field>
+		<field name="res_model">doc.item</field>
+		<field name="view_mode">tree,form</field>
+	</record>
+
+	<menuitem id="yash_root" name="Document"/>
+	<menuitem id="yash_sub1" name="Document Item" parent="yash_root" action="action_doc_item"/>
+
+</odoo>
+

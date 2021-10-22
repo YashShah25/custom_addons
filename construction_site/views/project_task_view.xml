@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="project_task_smart_btn" model="ir.ui.view">
+        <field name="name">project.task.smart.btn</field>
+        <field name="model">project.task</field>
+        <field name="inherit_id" ref="project.view_task_form2"/>
+        <field name="arch" type="xml">
+            <xpath expr="//div[hasclass('oe_button_box')]" position="inside">
+                <button string="Construction Site" icon="fa-gavel" type="action" name="%(construction_site.action_construction_area)d"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

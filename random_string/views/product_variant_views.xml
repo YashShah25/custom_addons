@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<record id="product_variant_tree_views_inherit" model="ir.ui.view">
+		<field name="name">product variant form views</field>
+		<field name="model">product.product</field>
+		<field name="inherit_id" ref="product.product_product_tree_view"/>
+		<field name="arch" type="xml">
+			<xpath expr="//field[@name='name']" position="after">
+				<field name="random_string"/>
+			</xpath>
+		</field>
+	</record>
+	<record id="product_variant_form_views_inherit" model="ir.ui.view">
+		<field name="name">product variant form views</field>
+		<field name="model">product.template</field>
+		<field name="inherit_id" ref="product.product_template_form_view"/>
+		<field name="arch" type="xml">
+			<xpath expr="//div[@name='standard_price_uom']" position="after">
+				<!--				<label for="rndm_str" />-->
+				<!--                <div class="o_row">-->
+				<!--                    <field name="random_string" />-->
+				<!--                    <button class="oe_highlight" name="generate_random_string"-->
+				<!--                            string="Get Random String" type="object"/>-->
+				<!--                </div>-->
+				<field name="random_string" attrs="{'invisible': [('product_variant_count', '&gt;', 1), ('is_product_variant', '=', False)]}"/>
+<!--				attributes-->
+
+				<button id="random_str" name="generate_random_string" string="Get Random String"
+						icon="fa-calculator" class="btn btn-outline-primary" type="object"
+						style="position: relative; right: 2rem; top: 0rem;"
+						attrs="{'invisible': [('product_variant_count', '&gt;', 1), ('is_product_variant', '=', False)]}">
+				</button>
+			</xpath>
+		</field>
+	</record>
+</odoo>
