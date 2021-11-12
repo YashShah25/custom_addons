@@ -1,0 +1,79 @@
+<odoo>
+    <record id="construction_site_tree_view" model="ir.ui.view">
+        <field name="name">construction.site.tree.view</field>
+        <field name="model">construction.site</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="sequence" widget="handle"/>
+                <field name="name"/>
+                <field name="display_name"/>
+                <field name="reference"/>
+                <field name="scheduled_date"/>
+                <field name="state"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="construction_site_form_view" model="ir.ui.view">
+        <field name="name">construction.site.form.view</field>
+        <field name="model">construction.site</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button id="button_run" name="action_run" string="Start" type="object" class="btn-success"
+                            states="draft"/>
+                    <button id="button_stop" name="action_stop" string="Stop" type="object" class="btn-danger"
+                            states="running"/>
+                    <button id="button_in_close" name="action_in_close" string="In Close" type="object"
+                            class="btn-warning" states="stop"/>
+                    <button id="button_close" name="action_close" string="Close" type="object" class="btn-secondary"
+                            states="in_closing"/>
+                    <button id="button_draft" name="action_draft" string="Draft" type="object" class="btn-primary"
+                            states="close"/>
+                    <field name="state" widget="statusbar" statusbar_visible="draft,closed,running,in_closing,stop"
+                           options="{'clickable': '1'}"/>
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+
+                    </div>
+                    <div class="oe_title">
+                        <h1>
+                            <group>
+                                <field name="name" placeholder="Name" required="True" nolabel="1"/>
+                            </group>
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="delivery_address"/>
+                            <field name="responsible_internal_id"/>
+                            <field name="responsible_on_site_id"/>
+                        </group>
+                        <group>
+                            <field name="scheduled_date"/>
+                            <field name="reference"/>
+                        </group>
+                        <group>
+                            <field name="general_contractor_purchase_id"/>
+                            <field name="sale_order_id"/>
+                        </group>
+                    </group>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="activity_ids" widget="mail_activity"/>
+                    <field name="message_ids" widget="mail_thread" options="{'post_refresh': 'recipients'}"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_construction_area" model="ir.actions.act_window">
+        <field name="name">Construction.Site</field>
+        <field name="res_model">construction.site</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem id="construction_site_root_menu" name="construction site" action="action_construction_area"/>
+</odoo>

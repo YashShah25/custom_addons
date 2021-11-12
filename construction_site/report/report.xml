@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+	<template id="document_detail_report">
+		<t t-call="web.html_container">
+			<t t-foreach="docs" t-as="o">
+				<t t-call="web.external_layout">
+					<div class="page">
+						<h2>Document Detail</h2>
+						<p>This object's name is
+							<span t-field="o.name"/>
+						</p>
+						<t t-foreach="document_actibe_list" t-as="x">
+							<p>
+								<t t-esc="x"></t>
+							</p>
+
+						</t>
+						<t t-foreach="document_actibe_list" t-as="x">
+							<p>
+								<t t-esc="x"></t>
+							</p>
+
+						</t>
+					</div>
+				</t>
+			</t>
+		</t>
+	</template>
+
+	<record id="document_report" model="ir.actions.report">
+		<field name="name">Document Detail</field>
+		<field name="model">doc.item</field>
+		<field name="report_type">qweb-pdf</field>
+		<field name="report_name">document.document_detail_report</field>
+		<field name="report_file">document.document_detail_report</field>
+		<field name="binding_model_id" ref="model_doc_item"/>
+		<field name="binding_type">report</field>
+	</record>
+</odoo>
