@@ -67,14 +67,14 @@
                                                 <select name="country_id" id="country_id" class="form-control">
                                                     <option value="">Select Country</option>
                                                     <t t-foreach="countries" t-as="country">
-                                                        <option t-att-value="country.id" t-att-selected="(partner and partner.country_id and partner.country_id.id == country.id) and 'selected'">
+                                                        <option t-att-value="country.id" t-att-selected="(partner and partner.country_id and partner.country_id.id == country.id)">
                                                             <t t-esc="country.name"/>
                                                         </option>
                                                     </t>
                                                 </select>
                                             </div>
                                             <div class="col-md-3">
-                                                <input type="checkbox" name="team_lead" id="team_lead" class="" t-att-checked="(partner and partner.team_lead) and 'checked'"/>
+                                                <input type="checkbox" name="team_leadid = team_lead" id="team_lead" class="" t-att-checked="(partner and partner.team_lead) and 'checked'"/>
                                                 <label for="team_lead">Team Lead?</label>
                                             </div>
                                         </div>

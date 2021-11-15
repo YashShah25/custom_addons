@@ -17,10 +17,13 @@
     ],
     "data": [
         "security/ir.model.access.csv",
+        "security/create_employee_security.xml",
+        # "views/project_task_view.xml",
         "views/construction_site_view.xml",
-        "views/project_task_view.xml",
         "views/purchase_order_view.xml",
         "views/sale_order_view.xml",
+        "wizard/construction_site_wizard.xml",
+
     ],
     "demo": [],
     "sequence": 1,

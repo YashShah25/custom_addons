@@ -1,99 +1,51 @@
 # -*- coding: utf-8 -*-
-import json
-
 from odoo import http
 from odoo.http import request, route
-import base64
 
 
-class Contact(http.Controller):
-    @http.route("/contact", type="http", website=True, auth="public", csrf=False)
-    def demo_page(self, **kw):
-        contacts = request.env["res.partner"].sudo().search([])
-        return request.render("contact_session.contacts_list", {"contacts": contacts})
-
-    @http.route(
-        "/contact/<model('res.partner'):contact>",
-        type="http",
-        website=True,
-        auth="public",
-    )
-    def contact_details(self, contact):
-        domain = []
-        if contact.country_id:
-            domain.append(("country_id", "=", contact.country_id.id))
-        states = request.env["res.country.state"].sudo().search(domain)
-        countries = request.env["res.country"].sudo().search([])
-        return request.render(
-            "contact_session.contact_form_template",
-            {"partner": contact, "countries": countries, "states": states,},
-        )
-
-    @http.route("/contact_form", type="http", website=True, auth="public", csrf=True)
-    def create_new_contact(self, **kw):
+class Controller(http.Controller):
+    @http.route("/create_employee", type="http", website=True, auth="public", csrf=False)
+    def employee_info(self):
+        employee = request.env["create.employees"].sudo().search([])
         states = request.env["res.country.state"].sudo().search([])
         countries = request.env["res.country"].sudo().search([])
-        return request.render(
-            "contact_session.contact_form_template",
-            {"countries": countries, "states": states,},
-        )
+        job_position = request.env["hr.job"].sudo().search([])
+        return request.render("create_employees.create_employees_template",
+                              {"employee": employee, "states": states, "countries": countries,
+                               "job_position": job_position})
 
-    @http.route("/get/filtered/states", type="json", auth="public")
-    def get_filtered_states(self, **kw):
-        data = {"status": False, "error": False, "states": False}
-        try:
-            domain = []
-            if "country_id" in kw and kw.get("country_id", False):
-                domain.append(("country_id", "=", int(kw.get("country_id"))))
-            states = (
-                request.env["res.country.state"]
-                .sudo()
-                .search_read(domain, ["id", "name"])
-            )
-            data["states"] = states
-            data["status"] = True
-        except Exception as e:
-            data["error"] = e
-        return data
+    @http.route("/create_emp", type="http", website=True, auth="user", csrf=False)
+    def new_employee_create(self, **kw):
+        name = kw.get("name")
+        birth_date = kw.get("birth_date")
+        street = kw.get("street")
+        state_id = kw.get("state_id")
+        country_id = kw.get("country_id")
+        city = kw.get("city")
+        email = kw.get("email")
+        phone = kw.get("phone")
+        gender = kw.get("gender")
+        experience_info = kw.get("experience_info")
+        expected_salary = kw.get("expected_salary")
+        jp = kw.get("job_position_id")
 
-    @http.route("/get/error/dialog", type="json", auth="public")
-    def get_error_dialog(self, **kw):
-        markup = (
-            request.env["ir.ui.view"]
-            .sudo()
-            ._render_template("contact_session.error_dialog_template", kw)
-        )
-        return markup
+        print(
+            f"\n\n\n\n name:{name}\n,dob:{birth_date}\n,street:{street}\n,sate:{state_id}\n,country: {country_id}\n,"
+            f"city :{city}\n,email: {email}\n,Phone :{phone}\n,gender: {gender}\n,exp_info : {experience_info}\n,"
+            f"exp_sal :{expected_salary}\n,jp:{jp}")
+        if kw:
+            print("\n\nkw = ", kw)
+            request.env["create.employees"].sudo().create(kw)
+        return request.redirect("/create_employee")
 
-    @http.route("/contact_update", type="http", website=True, auth="public", csrf=False)
-    def contact_update(self, **kw):
-        print("\n\n\n\nkw-----------------", kw)
-        partner_id = kw.get("partner_id", False)
-        del kw["partner_id"]
-        partner_obj = request.env["res.partner"].sudo()
-        partner = False
-        if "state_id" in kw and kw.get("state_id"):
-            kw["state_id"] = int(kw["state_id"])
-        else:
-            kw["state_id"] = False
-        if "country_id" in kw and kw.get("country_id"):
-            kw["country_id"] = int(kw["country_id"])
-        else:
-            kw["country_id"] = False
-
-        if "team_lead" not in kw:
-            kw["team_lead"] = False
-
-        if "delete_image" in kw and kw.get("delete_image") == "True":
-            kw["image_1920"] = False
-        else:
-            if "image_1920" in kw and kw.get("image_1920"):
-                kw["image_1920"] = base64.b64encode(kw["image_1920"].read())
-        del kw["delete_image"]
-
-        if partner_id:
-            partner = partner_obj.browse(int(partner_id))
-            partner.write(kw)
-        else:
-            partner = partner_obj.create(kw)
-        return request.redirect("/contact/%s" % partner.id)
+    @http.route("/employee_details", type="http", website=True, auth="user", csrf=False)
+    def employee_details(self, **kw):
+        job_position = request.env["hr.job"].sudo().search([])
+        values = {"job_position": job_position}
+        if kw:
+            jp, filtered_employee = False, False
+            if kw.get('job_position'):
+                jp = int(kw.get('job_position'))
+                filtered_employee = request.env["create.employees"].sudo().search([('job_position_id', '=', jp)])
+            values.update({'submit': True, 'filtered_employee': filtered_employee, 'jp': jp})
+        return request.render("create_employees.employees_details_template", values)

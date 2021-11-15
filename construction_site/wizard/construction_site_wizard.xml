@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="view_sale_advance_payment_inv" model="ir.ui.view">
+        <field name="name">Construction Site Wizard Report</field>
+        <field name="model">construction.wizard</field>
+        <field name="arch" type="xml">
+            <form>
+                <group>
+                    <field name="start_date"/>
+                    <field name="end_date"/>
+                </group>
+                <footer>
+                    <button name="print_report" id="create_repo" string="Print Report" type="object"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_construction_wizard" model="ir.actions.act_window">
+        <field name="name">Wizard action</field>
+        <field name="res_model">construction.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+
+    <menuitem name="Report Wizard" id="construction_site_repo_sdt_menu" action="action_construction_wizard" parent="construction_site_root_menu"/>
+
+</odoo>

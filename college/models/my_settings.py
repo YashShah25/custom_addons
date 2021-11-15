@@ -54,5 +54,4 @@ class MySettings(models.TransientModel):
         self.env["ir.config_parameter"].set_param(
             "college.partner_ids", self.partner_ids.ids
         )
-
         return super(MySettings, self).set_values()

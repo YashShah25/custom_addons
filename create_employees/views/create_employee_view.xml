@@ -1,41 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
-    <record id="construction_site_tree_view" model="ir.ui.view">
-        <field name="name">construction.site.tree.view</field>
-        <field name="model">construction.site</field>
+    <record id="create_employees_tree_view" model="ir.ui.view">
+        <field name="name">create.employees.tree.view</field>
+        <field name="model">create.employees</field>
         <field name="arch" type="xml">
             <tree>
                 <field name="sequence" widget="handle"/>
                 <field name="name"/>
-                <field name="display_name"/>
-                <field name="reference"/>
-                <field name="scheduled_date"/>
-                <field name="state"/>
+                <field name="gender"/>
+                <field name="birth_date"/>
+                <field name="email"/>
+                <field name="phone"/>
+                <field name="job_position_id"/>
             </tree>
         </field>
     </record>
 
-    <record id="construction_site_form_view" model="ir.ui.view">
-        <field name="name">construction.site.form.view</field>
-        <field name="model">construction.site</field>
+    <record id="create_employees_form_view" model="ir.ui.view">
+        <field name="name">create.employees.form.view</field>
+        <field name="model">create.employees</field>
         <field name="arch" type="xml">
             <form>
                 <header>
-                    <button id="button_run" name="action_run" string="Start" type="object" class="btn-success"
-                            states="draft"/>
-                    <button id="button_stop" name="action_stop" string="Stop" type="object" class="btn-danger"
-                            states="running"/>
-                    <button id="button_in_close" name="action_in_close" string="In Close" type="object"
-                            class="btn-warning" states="stop"/>
-                    <button id="button_close" name="action_close" string="Close" type="object" class="btn-secondary"
-                            states="in_closing"/>
-                    <button id="button_draft" name="action_draft" string="Draft" type="object" class="btn-primary"
-                            states="close"/>
-                    <field name="state" widget="statusbar" statusbar_visible="draft,closed,running,in_closing,stop"
-                           options="{'clickable': '1'}"/>
+                    <button name='calculate_year' type='object' string='Calculate year' class='btn-primary'
+                            attrs="{'invisible' : ['|',('button_hide', '=', False),('button_hide','ilike','month')]}"/>
+                    <button name="calculate_month" type="object" string='Calculate Month' class="btn-primary"
+                            attrs="{'invisible' : ['|',('button_hide', '=', False),('button_hide','ilike','year')]}"/>
                 </header>
                 <sheet>
                     <div class="oe_button_box" name="button_box">
-
                     </div>
                     <div class="oe_title">
                         <h1>
@@ -46,19 +39,42 @@
                     </div>
                     <group>
                         <group>
-                            <field name="delivery_address"/>
-                            <field name="responsible_internal_id"/>
-                            <field name="responsible_on_site_id"/>
+                            <field name="email"/>
+                            <field name="phone"/>
+                            <field name="gender"/>
+                            <field name="birth_date"/>
+                            <field name="age"/>
                         </group>
                         <group>
-                            <field name="scheduled_date"/>
-                            <field name="reference"/>
-                        </group>
-                        <group>
-                            <field name="general_contractor_purchase_id"/>
-                            <field name="sale_order_id"/>
+                            <field name="street"/>
+                            <field name="city"/>
+                            <field name="state_id"/>
+                            <field name="country_id"/>
+                            <div>
+                                <button string="Calculate Age" type="object" name="calculate_age" class="btn-primary"/>
+                            </div>
                         </group>
                     </group>
+                    <group>
+                        <field name="experience_info"/>
+                    </group>
+                    <group>
+                        <group>
+                            <field name="job_position_id"/>
+                            <field name="expected_salary"/>
+                            <field name="start_date"/>
+                            <field name="end_date"/>
+                        </group>
+                        <group>
+                            <field name="affordable_salary"/>
+                            <field name="extra_amount"/>
+                            <field name="yearly_amount"
+                                   attrs="{'invisible' : ['|',('button_hide', '=', False),('button_hide','ilike','month')]}"/>
+                            <field name="monthly_amount"
+                                   attrs="{'invisible' : ['|',('button_hide', '=', False),('button_hide','ilike','year')]}"/>
+                        </group>
+                    </group>
+                    <field name="button_hide" invisible="1"/>
                 </sheet>
                 <div class="oe_chatter">
                     <field name="message_follower_ids" widget="mail_followers"/>
@@ -69,11 +85,28 @@
         </field>
     </record>
 
-    <record id="action_construction_area" model="ir.actions.act_window">
-        <field name="name">Construction.Site</field>
-        <field name="res_model">construction.site</field>
-        <field name="view_mode">tree,form</field>
+    <record id="search_create_employees" model="ir.ui.view">
+        <field name="name">search.create.employees</field>
+        <field name="model">create.employees</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+                <field name="email"/>
+                <separator/>
+                <group string="Group By">
+                    <filter string="Gender" name="gender" context="{'group_by':'gender'}"/>
+                    <filter string="Country_id" name="country_id" context="{'group_by':'country_id'}"/>
+                    <filter string="State_id" name="state_id" context="{'group_by':'state_id'}"/>
+                    <filter string="Monthly Amount" name="monthly_amount" context="{'group_by':'monthly_amount'}"/>
+                </group>
+            </search>
+        </field>
     </record>
 
-    <menuitem id="construction_site_root_menu" name="construction site" action="action_construction_area"/>
+    <record id="action_create_employees" model="ir.actions.act_window">
+        <field name="name">create employees</field>
+        <field name="res_model">create.employees</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+    <menuitem id="create_employees_root_menu" name="create employees" action="action_create_employees"/>
 </odoo>
