@@ -30,6 +30,7 @@
 			<form>
 				<header>
 					<button type="object" name="wiz_open" string="By Custom Method"/>
+					<button type="object" name="school_send_mail" string="Send Email"/>
 				</header>
 				<sheet>
 					<div class="oe_button_box" name="button_box">

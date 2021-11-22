@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <template id="portal_my_home_menu_construction" name="Portal layout : construction sites entries"
+              inherit_id="portal.portal_breadcrumbs" priority="20">
+        <xpath expr="//ol[hasclass('o_portal_submenu')]" position="inside">
+            <li t-if="page_name == 'site'"
+                t-attf-class="breadcrumb-item #{'active ' if not site else ''}">
+                <t t-if="not site">construction site</t>
+                <a t-else="" t-attf-href="/my/construction_site?{{ keep_query() }}">construction site</a>
+            </li>
+            <li t-if="page_name == 'site_info'"
+                t-attf-class="breadcrumb-item #{'active ' if not site else ''}">
+                <a t-attf-href="/my/construction_site?{{ keep_query() }}">construction site</a>
+            </li>
+            <li t-if="page_name == 'site_info'" t-attf-class="breadcrumb-item #{'active ' if not site_info else ''}">
+                <t t-esc="site_id.name"/>
+            </li>
+        </xpath>
+    </template>
+
+    <template id="portal_my_construction" name="My Construction">
+        <t t-call="portal.portal_layout">
+            <t t-set="breadcrumbs_searchbar" t-value="True"/>
+
+            <t t-call="portal.portal_searchbar">
+                <t t-set="title">Construction</t>
+            </t>
+
+            <t t-if="not sites">
+                <p>There are currently no construction sites for your account.</p>
+            </t>
+            <t t-if="sites" t-call="portal.portal_table">
+                <thead>
+                    <tr class="active">
+                        <th>Construction Sites #</th>
+                        <!--                        <th class="text-right">Name</th>-->
+                        <th class="text-right">Schedule Date</th>
+                        <!--                        <th class="text-right">Valid Until</th>-->
+                        <th class="text-center"/>
+                        <th class="text-right">Reference</th>
+                    </tr>
+                </thead>
+                <t t-foreach="sites" t-as="site">
+                    <tr>
+
+                        <td>
+                            <a t-attf-href="/site/info/#{site.id}"
+                               class="my_flex flex_container col-sm-5 col-md-3">
+                                <t t-esc="site.name"/>
+                            </a>
+                        </td>
+                        <td class="text-right">
+                            <span t-field="site.scheduled_date"/>
+                        </td>
+
+                        <td class="text-center">
+                            <span t-if="site.state == 'closed'" class="badge badge-pill badge-secondary">
+                                <i class="fa fa-fw fa-remove"/>
+                                Closed
+                            </span>
+                        </td>
+                        <td class="text-right">
+                            <span t-field="site.reference"/>
+                        </td>
+                    </tr>
+                </t>
+            </t>
+        </t>
+    </template>
+
+    <template id="site_info" name="site info">
+        <t t-call="portal.portal_layout">
+            <t t-set="breadcrumbs_searchbar" t-value="True"/>
+
+            <t t-call="portal.portal_searchbar">
+                <t t-set="title">Site Info</t>
+            </t>
+            <table>
+                <thead>
+                    <tr class="active">
+                        <!--                        <th>Construction Sites #</th>-->
+                        <th class="text-right">Name</th>
+                        <th class="text-right">Schedule Date</th>
+                        <!--                        <th class="text-right">Valid Until</th>-->
+                        <th class="text-center"/>
+                        <th class="text-right">Reference</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            <t t-esc="site_id.name"/>
+                        </td>
+                        <td class="text-right">
+                            <span t-field="site_id.scheduled_date"/>
+                        </td>
+
+                        <td class="text-center">
+                            <span t-if="site_id.state == 'closed'" class="badge badge-pill badge-secondary">
+                                <i class="fa fa-fw fa-remove"/>
+                                Closed
+                            </span>
+                        </td>
+                        <td class="text-right">
+                            <span t-field="site_id.reference"/>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </t>
+    </template>
+
+</odoo>

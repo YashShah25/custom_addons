@@ -117,6 +117,50 @@ odoo.define("contacts", function (require) {
             });
         });
 
+
+
+        $("#members_name").on("change", function(e) {
+            let element = $(this)
+            let member_id = element.val();
+
+            ajax.jsonRpc('/members_name', 'call', {'country_id': country_id}).then(function(data) {
+                console.log(data)
+                if (data['status'])
+                {
+                    let markup = ""
+                    markup += "<option value=''>Select State</option>"
+                    $.each(data['states'], function(){
+                        if (selected_state == this['id'])
+                        {
+                            markup += "<option value='"+this['id']+"' selected='selected'>"+this['name']+"</option>"
+                        }
+                        else
+                        {
+                            markup += "<option value='"+this['id']+"'>"+this['name']+"</option>"
+                        }
+                    });
+
+                    state_ele.empty().append(markup);
+                    $('#contact_form_submit_btn').attr("disabled", false);
+                }
+                else
+                {
+                    $('#contact_form_submit_btn').attr("disabled", false);
+                    ajax.jsonRpc('/get/error/dialog', 'call', {'error': data['error']}).then(function(modal) {
+                        var $modal = $(modal)
+                        $modal.modal('show')
+
+                        $modal.on('hidden.bs.modal', function (e) {
+                            $modal.modal('dispose');
+                        });
+
+                    });
+
+                }
+
+            });
+        });
+
         console.log('starting')
         rpc.query({
             route: '/get/filtered/states',

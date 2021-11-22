@@ -10,6 +10,7 @@
         "mail",
         "sale_management",
         "account",
+        "website",
         "hr",
         "stock",
         "project",
@@ -17,11 +18,12 @@
     ],
     "data": [
         "security/ir.model.access.csv",
-        "security/create_employee_security.xml",
         # "views/project_task_view.xml",
         "views/construction_site_view.xml",
         "views/purchase_order_view.xml",
         "views/sale_order_view.xml",
+        "views/construction_site_portal_templates.xml",
+        "views/construction_site_portal_website.xml",
         "wizard/construction_site_wizard.xml",
 
     ],

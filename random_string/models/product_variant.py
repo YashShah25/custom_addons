@@ -8,23 +8,17 @@ from odoo.tools.translate import _
 class Product(models.Model):
     _inherit = "product.template"
 
-    # attrs = "{'invisible': [('product_variant_count', '>', 1)]}"
-
     random_string = fields.Char(
         string=_("Random String"),
         compute="_compute_random_string",
-        inverse="_set_random_string",
+        # inverse="_set_random_string",
     )
 
     @api.depends("product_variant_ids", "product_variant_ids.random_string")
     def _compute_random_string(self):
         print("\n\n\n\n\n _compute_random_string\n\n\n self before loop: ", self)
-
+        self.product_variant_ids.random_string = False
         unique_variants = self.filtered(lambda temp: len(temp.product_variant_ids) == 1)
-        # print("\n\n\n\n\n temp.product_variant_ids: ", temp.product_variant_ids)
-        # print("\n\n\n\n\n len(temp.product_variant_ids): ", len(temp.product_variant_ids))
-        # print("\n\n\n\n\n lambda temp: len(temp.product_variant_ids): ", lambda temp: len(temp.product_variant_ids))
-        print("\n\n\n\n\n unique_variants: ", unique_variants)
 
         for temp in unique_variants:
             print("\n\n\n\n\n temp inside loop:[]", temp)
@@ -35,34 +29,33 @@ class Product(models.Model):
                 temp.random_string,
             )
 
-    def _set_random_string(self):
-        print("\n\n\n\n\n _set_random_string\n\n\n self before loop: ", self)
-        for temp in self:
-            print("\n\n\n\n\n self inside loop:[]: [] ", self, temp)
-
-            if len(temp.product_variant_ids) == 1:
-                print(
-                    "\n\n\n\n\n temp.product_variant_ids inside if:[] and len:[] ",
-                    temp.product_variant_ids,
-                    len(temp.product_variant_ids),
-                )
-
-                temp.product_variant_ids.random_string = temp.random_string
-                print(
-                    "\n\n\n\n\n temp.product_variant_ids.random_string inside if:[] and temp.random_string:[] ",
-                    temp.product_variant_ids.random_string,
-                    temp.random_string,
-                )
-
     def generate_random_string(self):
         print("\n\n\n\n\n generate_random_string 1.0\n\n\n", self)
 
-        str = "".join(
+        self.product_variant_ids.random_string = "".join(
             random.choices(
                 string.ascii_uppercase + string.digits + string.ascii_lowercase, k=5
             )
         )
-        self.update({"random_string": str})
+
+    # def _set_random_string(self):
+    #     print("\n\n\n\n\n _set_random_string\n\n\n self before loop: ", self)
+    #     for temp in self:
+    #         print("\n\n\n\n\n self inside loop:[]: [] ", self, temp)
+    #
+    #         if len(temp.product_variant_ids) == 1:
+    #             print(
+    #                 "\n\n\n\n\n temp.product_variant_ids inside if:[] and len:[] ",
+    #                 temp.product_variant_ids,
+    #                 len(temp.product_variant_ids),
+    #             )
+    #
+    #             temp.product_variant_ids.random_string = temp.random_string
+    #             print(
+    #                 "\n\n\n\n\n temp.product_variant_ids.random_string inside if:[] and temp.random_string:[] ",
+    #                 temp.product_variant_ids.random_string,
+    #                 temp.random_string,
+    #             )
 
 
 class Productvatiant(models.Model):
@@ -73,9 +66,8 @@ class Productvatiant(models.Model):
     def generate_random_string(self):
         print("\n\n\n\n\n generate_random_string 1.1\n\n\n", self)
 
-        str = "".join(
+        self.random_string = "".join(
             random.choices(
                 string.ascii_uppercase + string.digits + string.ascii_lowercase, k=5
             )
         )
-        self.update({"random_string": str})

@@ -13,29 +13,32 @@ class Contact(http.Controller):
         return request.render("contact_session.contacts_list", {"contacts": contacts})
 
     @http.route(
-        "/contact/<model('res.partner'):contact>",
-        type="http",
-        website=True,
-        auth="public",
-    )
+        "/contact/<model('res.partner'):contact>", type="http", website=True, auth="public", )
     def contact_details(self, contact):
         domain = []
         if contact.country_id:
             domain.append(("country_id", "=", contact.country_id.id))
         states = request.env["res.country.state"].sudo().search(domain)
         countries = request.env["res.country"].sudo().search([])
+        members = request.env["res.partner"].sudo().search([])
+
+        # if contact.team_lead:
+        #     tl_ids = contact.team_lead_ids
         return request.render(
             "contact_session.contact_form_template",
-            {"partner": contact, "countries": countries, "states": states,},
+            {"partner": contact, "countries": countries, "states": states, 'members': members},
         )
 
     @http.route("/contact_form", type="http", website=True, auth="public", csrf=True)
     def create_new_contact(self, **kw):
         states = request.env["res.country.state"].sudo().search([])
         countries = request.env["res.country"].sudo().search([])
+        members = request.env["res.partner"].sudo().search([])
+        partner = request.env["res.partner"]
+        print('\n\n\nmembers======', members)
         return request.render(
             "contact_session.contact_form_template",
-            {"countries": countries, "states": states,},
+            {"countries": countries, "states": states, 'partner': partner, 'members': members},
         )
 
     @http.route("/get/filtered/states", type="json", auth="public")
@@ -46,9 +49,7 @@ class Contact(http.Controller):
             if "country_id" in kw and kw.get("country_id", False):
                 domain.append(("country_id", "=", int(kw.get("country_id"))))
             states = (
-                request.env["res.country.state"]
-                .sudo()
-                .search_read(domain, ["id", "name"])
+                request.env["res.country.state"].sudo().search_read(domain, ["id", "name"])
             )
             data["states"] = states
             data["status"] = True
@@ -59,9 +60,7 @@ class Contact(http.Controller):
     @http.route("/get/error/dialog", type="json", auth="public")
     def get_error_dialog(self, **kw):
         markup = (
-            request.env["ir.ui.view"]
-            .sudo()
-            ._render_template("contact_session.error_dialog_template", kw)
+            request.env["ir.ui.view"].sudo()._render_template("contact_session.error_dialog_template", kw)
         )
         return markup
 
@@ -93,7 +92,21 @@ class Contact(http.Controller):
 
         if partner_id:
             partner = partner_obj.browse(int(partner_id))
-            partner.write(kw)
+            partner.team_lead_ids = [(5,)]
+            a = []
+            for k,v in kw.items():
+                if k.startswith('member_id'):
+                    a.append((0, 0, {"member_id": int(v)}))
+            partner.team_lead_ids = a
+            # partner.write(kw)
         else:
-            partner = partner_obj.create(kw)
+            partner = partner_obj.create({"member_id": kw["member_id"]})
         return request.redirect("/contact/%s" % partner.id)
+
+    @http.route("/members_name", type="json", auth="public")
+    def members_name_data(self, **kw):
+        print("\n\nmembers_name===========",kw)
+        markup = (
+            request.env["ir.ui.view"].sudo()._render_template("contact_session.contact_form_template", kw)
+        )
+

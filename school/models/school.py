@@ -9,7 +9,7 @@ class SchoolProfile(models.Model):
 
     # _rec_name = "name"
 
-    name = fields.Char(string="School name", help="Write a school name", index=True,)
+    name = fields.Char(string="School name", help="Write a school name", index=True, )
     type = fields.Selection(
         [("public", "Public"), ("private", "Private")], string="Type"
     )
@@ -97,11 +97,11 @@ class SchoolProfile(models.Model):
             "domain": [("school_select_id.id", "=", self.id)],
         }
 
-    @api.model
-    def name_create(self, name):
-        print("name_create calling...", name)
-        rtn = super(StudentProfile, self).name_create(name)
-        return rtn
+    # @api.model
+    # def name_create(self, name):
+    #     print("name_create calling...", name)
+    #     rtn = super(StudentProfile, self).name_create(name)
+    #     return rtn
 
     # def name_create(self, name):
     #     print("\n\nself", self)
@@ -135,6 +135,12 @@ class SchoolProfile(models.Model):
             "school.action_create_wizard"
         )
 
+    def school_send_mail(self):
+        print("\n\n\n\n\n\nstudenttttttttt")
+        template = self.env.ref('school.school_mail_template_view')
+        print("\n\n\n\n\n\nstudenttttttttt")
+        template.send_mail(self.id)
+
 
 # return {'type': "ir.actions.act_window",
 #         'res_model': "create.wizard",
@@ -145,7 +151,6 @@ class SchoolProfile(models.Model):
 class TestMethod(models.Model):
     _name = "report.sale.report_saleorder_document"
     _description = "bako"
-
 
 # def temp(self):
 # 	dic = {'y': 'yashu'}
