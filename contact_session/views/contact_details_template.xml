@@ -122,14 +122,39 @@
                                         </tr>
                                     </thead>
                                     <tbody>
+                                        <!--                                        <tr>-->
+                                        <!--                                            <td>-->
+                                        <!--                                                <select t-attf-name="member_id_111"-->
+                                        <!--                                                        id="members_name" class="form-control">-->
+                                        <!--                                                    <option value="">add Member</option>-->
+                                        <!--                                                    <t t-foreach="members" t-as="member">-->
+                                        <!--                                                        <option t-att-value="member.id">-->
+                                        <!--&lt;!&ndash;                                                                t-att-selected="(member_id and member_id.name and member.name == member_id.name)">&ndash;&gt;-->
+                                        <!--                                                            <t t-esc="member.name"/>-->
+                                        <!--                                                        </option>-->
+                                        <!--                                                    </t>-->
+                                        <!--                                                </select>-->
+
+                                        <!--                                            </td>-->
+                                        <!--                                            <td>-->
+                                        <!--                                                <t t-esc="(member_id) and member_id.email" placeholder="Email"/>-->
+                                        <!--                                            </td>-->
+                                        <!--                                            <td>-->
+                                        <!--                                                <t t-esc="(member_id) and member_id.phone" placeholder="Phone"/>-->
+                                        <!--                                            </td>-->
+                                        <!--                                            <td>-->
+                                        <!--                                                <t t-esc="(member_id) and member_id.address" placeholder="Address"/>-->
+                                        <!--                                            </td>-->
+                                        <!--                                        </tr>-->
                                         <tr t-foreach="partner.team_lead_ids" t-as="member_id">
                                             <td>
-                                                <select t-attf-name="member_id_#{member_id.member_id.id}" id="members_name" class="form-control">
-                                                    <option value="">Add Member</option>
+                                                <select t-attf-name="member_id_#{member_id.member_id.id}"
+                                                        id="members_name" class="form-control">
+                                                    <option value="">select Member</option>
                                                     <t t-foreach="members" t-as="member">
-                                                        <option t-att-value="member_id.member_id.id"
+                                                        <option t-att-value="member.id"
                                                                 t-att-selected="(member_id and member_id.name and member.name == member_id.name)">
-                                                            <t t-esc="member_id.name"/>
+                                                            <t t-esc="member.name"/>
                                                         </option>
                                                     </t>
                                                 </select>

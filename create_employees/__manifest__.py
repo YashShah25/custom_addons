@@ -13,6 +13,7 @@
     ],
     "data": [
         "security/ir.model.access.csv",
+        "security/security.xml",
         "data/employee_menu.xml",
         "views/create_employee_view.xml",
         "views/hr_job_view.xml",

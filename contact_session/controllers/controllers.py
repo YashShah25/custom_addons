@@ -22,8 +22,8 @@ class Contact(http.Controller):
         countries = request.env["res.country"].sudo().search([])
         members = request.env["res.partner"].sudo().search([])
 
-        # if contact.team_lead:
-        #     tl_ids = contact.team_lead_ids
+        if contact.team_lead:
+            tl_ids = contact.team_lead_ids
         return request.render(
             "contact_session.contact_form_template",
             {"partner": contact, "countries": countries, "states": states, 'members': members},
@@ -94,7 +94,7 @@ class Contact(http.Controller):
             partner = partner_obj.browse(int(partner_id))
             partner.team_lead_ids = [(5,)]
             a = []
-            for k,v in kw.items():
+            for k, v in kw.items():
                 if k.startswith('member_id'):
                     a.append((0, 0, {"member_id": int(v)}))
             partner.team_lead_ids = a
@@ -105,8 +105,7 @@ class Contact(http.Controller):
 
     @http.route("/members_name", type="json", auth="public")
     def members_name_data(self, **kw):
-        print("\n\nmembers_name===========",kw)
+        print("\n\nmembers_name===========", kw)
         markup = (
             request.env["ir.ui.view"].sudo()._render_template("contact_session.contact_form_template", kw)
         )
-
