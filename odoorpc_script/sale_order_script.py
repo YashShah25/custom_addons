@@ -8,7 +8,7 @@ odoo.login("odoorpc_db", "admin", "admin")
 start_time = datetime.now()
 
 with open(
-        "/home/odoo/Odoo_Workspace/custom_addons/odoorpc_script/sale_order.csv"
+    "/home/odoo/Odoo_Workspace/custom_addons/odoorpc_script/sale_order.csv"
 ) as csv_file:
     csv_file = csv.DictReader(csv_file)
     print("\n\n csv_file ===================", csv_file)
@@ -52,7 +52,7 @@ with open(
         excel_row += 1
 
 with open(
-        "/home/odoo/Odoo_Workspace/custom_addons/odoorpc_script/sale_order_line.csv"
+    "/home/odoo/Odoo_Workspace/custom_addons/odoorpc_script/sale_order_line.csv"
 ) as csv_file:
     csv_file = csv.DictReader(csv_file)
     excel_row_line = 2
@@ -92,7 +92,7 @@ with open(
     excel_row_line += 1
 
 with open(
-        "/home/odoo/Odoo_Workspace/custom_addons/odoorpc_script/sale_order.csv"
+    "/home/odoo/Odoo_Workspace/custom_addons/odoorpc_script/sale_order.csv"
 ) as csv_file:
     csv_file = csv.DictReader(csv_file)
     excel_row = 2

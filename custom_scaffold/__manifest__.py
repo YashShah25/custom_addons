@@ -12,9 +12,7 @@
     # any module necessary for this one to work correctly
     "depends": [],
     # always loaded
-    "data": [
-        "security/ir.model.access.csv",
-    ],
+    "data": ["security/ir.model.access.csv",],
     "installable": True,
     "application": True,
     "auto_install": False,

@@ -12,10 +12,11 @@
     # any module necessary for this one to work correctly
     "depends": ["purchase"],
     # always loaded
-    "data": ["security/security.xml",
-             "security/ir.model.access.csv",
-             "views/purchase_order.xml",
-             ],
+    "data": [
+        "security/security.xml",
+        "security/ir.model.access.csv",
+        "views/purchase_order.xml",
+    ],
     "installable": True,
     "application": True,
     "auto_install": False,

@@ -4,24 +4,28 @@ from odoo.http import request
 
 
 class Controller(http.Controller):
-
-    @http.route("/bulk_product_register", type='http', auth='public', website=True)
+    @http.route("/bulk_product_register", type="http", auth="public", website=True)
     def list(self, **kw):
-        return request.render('bulk_products.bulk_product_register_template', {
-            'master_product_obj': request.env['product.template'].search([]),
-        })
+        return request.render(
+            "bulk_products.bulk_product_register_template",
+            {"master_product_obj": request.env["product.template"].search([]),},
+        )
 
     @http.route("/new_bulk_product", type="http", website=True, auth="user", csrf=False)
     def new_bulk_product(self, **kw):
         if kw:
             print("\n\nkw = ", kw)
-            partner = {'name': kw.get("name"),
-                       'email': kw.get("email"),
-                       'phone': kw.get("phone"), }
-            bulk_products = {'name': kw.get("name"),
-                             'master_product': kw.get("master_product"),
-                             'user_id': kw.get("user_id"),
-                             'email': kw.get("email"), }
+            partner = {
+                "name": kw.get("name"),
+                "email": kw.get("email"),
+                "phone": kw.get("phone"),
+            }
+            bulk_products = {
+                "name": kw.get("name"),
+                "master_product": kw.get("master_product"),
+                "user_id": kw.get("user_id"),
+                "email": kw.get("email"),
+            }
 
             request.env["bulk.products"].sudo().create(bulk_products)
             request.env["res.partner"].sudo().create(partner)

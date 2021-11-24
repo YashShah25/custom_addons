@@ -25,7 +25,6 @@
         "views/construction_site_portal_templates.xml",
         "views/construction_site_portal_website.xml",
         "wizard/construction_site_wizard.xml",
-
     ],
     "demo": [],
     "sequence": 1,

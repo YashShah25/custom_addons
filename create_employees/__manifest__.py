@@ -6,11 +6,7 @@
     "website": "https://www.aktivesoftware.com",
     "category": "Business, Corporate",
     "version": "14.0.1.0.0",
-    "depends": [
-        "mail",
-        "website",
-        "hr_recruitment"
-    ],
+    "depends": ["mail", "website", "hr_recruitment"],
     "data": [
         "security/ir.model.access.csv",
         "security/security.xml",
