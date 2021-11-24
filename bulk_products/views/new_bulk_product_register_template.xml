@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <template id="bulk_product_register_template" name="Contact Form">
+        <t t-call="website.layout">
+            <div class="form-group center">
+                <div>
+                    <h3>Bulk Product Register</h3>
+                </div>
+                <hr/>
+                <div class="clearfix">
+                    <form class="col-form-label" role="form" action="/new_bulk_product" type="post">
+                        <div class="form">
+                            <div class="form-group col-xl-3">
+                                <label class="col-form-label" for="name">Name:</label>
+                                <input type="text" id="name" name="name" class="form-control"/>
+                            </div>
+                            <div class="form-group col-xl-3">
+                                <label class="col-form-label" for="master_product">Master Product:</label>
+
+                                <select name="master_product" id="master_product" class="form-control">
+                                    <option value="">Select Master Product</option>
+                                    <t t-foreach="master_product_obj" t-as="product">
+                                        <option t-att-value="product.id">
+                                            <t t-esc="product.name"/>
+                                        </option>
+                                    </t>
+                                </select>
+
+                            </div>
+                            <div class="form-group col-xl-3">
+                                <label class="col-form-label" for="user_id">Partner Name:</label>
+                                <input type="text" id="user_id" name="user_id" class="form-control"/>
+                            </div>
+                            <div class="form-group col-xl-3">
+                                <label class="col-form-label" for="email">Email:</label>
+                                <input type="email" id="email" name="email" class="form-control" t-att-value="email"
+                                       placeholder="abc@gmail.com"/>
+                            </div>
+                            <div class="form-group col-xl-3">
+                                <label class="col-form-label" for="phone">Phone:</label>
+                                <input type="tel" id="phone" name="phone"
+                                       class="form-control"/>
+                            </div>
+                            <div class="oe_login_buttons">
+                                <button type="submit" class="btn btn-success">Submit
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </t>
+    </template>
+</odoo>

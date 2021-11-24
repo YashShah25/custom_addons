@@ -16,7 +16,7 @@
         "security/ir.model.access.csv",
         "data/docu_version_data.xml",
         "views/docu_item_views.xml",
-        "views/docu_tags_views.xml",
+        "views/purchase_order.xml",
         "views/docu_version_views.xml",
         "views/menuitems.xml",
     ],

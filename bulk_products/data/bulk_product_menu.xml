@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="bulk_product_menu" model="website.menu">
+        <field name="name">Bulk Product Register</field>
+        <field name="url">/bulk_product_register</field>
+        <field name="parent_id" ref="website.main_menu"/>
+        <field name="sequence" type="int">21</field>
+    </record>
+</odoo>

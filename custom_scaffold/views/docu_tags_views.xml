@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="" model="ir.ui.view">
+        <field name="name"></field>
+        <field name="model"></field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name=""/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="" model="ir.ui.view">
+        <field name="name"></field>
+        <field name="model"></field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name=""/>
+                            <field name="active" widget="boolean_toggle"/>
+                        </group>
+                    </group>     
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="search_view" model="ir.ui.view">
+        <field name="name">search.view</field>
+        <field name="model"></field>
+        <field name="arch" type="xml">
+            <search>
+                <field name=""/>
+                <separator/>
+                <filter name="archived" string="Archived" domain="[('active', '=', False)]"/>
+            </search>
+        </field>
+    </record>
+
+    <record id="action" model="ir.actions.act_window">
+        <field name="name"></field>
+        <field name="type"></field>
+        <field name="res_model"></field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem id="root" name=""/>
+	<menuitem id="sub1" name="" parent="root" action="action"/>
+
+</odoo>

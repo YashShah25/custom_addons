@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="purchase_order" model="ir.ui.view">
+        <field name="name">purchase_order</field>
+        <field name="model">purchase.order</field>
+        <field name="inherit_id" ref="purchase.purchase_order_form"/>
+        <field name="arch" type="xml">
+
+            <field name="state" position="attributes">
+                <attribute name="statusbar_visible">draft,sent,purchase,append</attribute>
+            </field>
+            <xpath expr="//header/button[@name='confirm_reminder_mail']" position="before">
+                <button name="button_append" type="object" states="purchase" string="Append" id="button_append"/>
+            </xpath>
+
+        </field>
+    </record>
+</odoo>
