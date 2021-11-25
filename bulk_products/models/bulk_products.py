@@ -21,8 +21,8 @@ class BulkProductsLine(models.Model):
     _name = "bulk.product.line"
     _description = "model for bulk product line"
 
-    name = fields.Char(related="product_id.name")
-    price = fields.Float(related="product_id.standard_price")
+    # name = fields.Char(related="product_id.name")
+    # price = fields.Float(related="product_id.lst_price")
     # product_uom = fields.Float(related='product_id.product_uom')
 
     product_id = fields.Many2one(
