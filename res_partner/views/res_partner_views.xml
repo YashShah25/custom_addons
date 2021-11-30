@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="res_partner_form" model="ir.ui.view">
+        <field name="name">partner form view</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//sheet/notebook/page[@name='sales_purchases']" position="after">
+                <page string="Quotation Limit" name="quotation_limit">
+                    <group priority="1">
+                        <group>
+                            <field name="credit_limit"/>
+                            <field name="blocking_limit"/>
+                        </group>
+                        <group>
+                            <field name="credit_limit_score" attrs="{'invisible': [('credit_limit', '=' ,False)]}"/>
+                            <field name="blocking_limit_score" attrs="{'invisible': [('blocking_limit', '=' ,False)]}"/>
+                        </group>
+                    </group>
+                </page>
+            </xpath>
+        </field>
+    </record>
+</odoo>

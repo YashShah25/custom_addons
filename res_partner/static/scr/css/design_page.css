@@ -1,0 +1,15 @@
+.my_flex{
+    display: flex;
+}
+.center{
+    margin-left: 45%;
+}
+.required {
+    color: red;
+}
+.contact_form{
+    margin: 20px 0px;
+}
+.form_input_wrapper{
+    margin-bottom: 15px;
+}

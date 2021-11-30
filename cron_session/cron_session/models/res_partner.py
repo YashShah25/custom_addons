@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from odoo import api, fields, models
+from odoo import api, models, fields
 
 
 class ResPartner(models.Model):
@@ -11,3 +11,4 @@ class ResPartner(models.Model):
         print("\n\n\n\ncron called------")
         partners = self.search([])
         print("\n\n\n\nPartners------", partners)
+

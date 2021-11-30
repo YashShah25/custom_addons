@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="fetch_partner_info_menu" model="website.menu">
+        <field name="name">Fetch Partner Info</field>
+        <field name="url">/fetch_partner_info</field>
+        <field name="parent_id" ref="website.main_menu"/>
+        <field name="sequence" type="int">21</field>
+    </record>
+</odoo>
