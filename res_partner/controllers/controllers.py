@@ -8,7 +8,7 @@ class Controller(http.Controller):
     def fetch_partner_info(self, **kw):
         return request.render(
             "res_partner.fetch_partner_info_template",
-            {"partners": request.env["res.partner"].search([]),},
+            {"partners": request.env["res.partner"].search([]), },
         )
 
     @http.route("/update_partner_form", type="http", auth="public", website=True)

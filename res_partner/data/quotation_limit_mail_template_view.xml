@@ -4,7 +4,8 @@
         <record id="quotation_limit_mail_template" model="mail.template">
             <field name="name">quotation limit mail template</field>
             <field name="model_id" ref="res_partner.model_res_partner"/>
-            <field name="email_from">partner@gmail.com</field>
+            <field name="email_from">akash@gmail.com</field>
+            <field name="email_to">shahil@gmail.com</field>
             <field name="subject">Quotation Limit</field>
             <field name="body_html" type="html">
                 <div style="margin: 0px; padding: 0px; border:1px solid black;">
