@@ -6,7 +6,7 @@ from odoo import models, fields, _, api
 class Wizardtest(models.TransientModel):
     _name = "employee.wizard"
     _description = "name"
-    name = fields.Char()
+    order_lines = fields.Char()
 
     @api.onchange("name")
     def employee_wizard(self):

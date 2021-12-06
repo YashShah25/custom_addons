@@ -3,13 +3,13 @@
     <data noupdate="0">
         <record id="quotation_limit_mail_template" model="mail.template">
             <field name="name">quotation limit mail template</field>
-            <field name="model_id" ref="res_partner.model_sale_order"/>
+            <field name="model_id" ref="res_partner.model_res_partner"/>
             <field name="email_from">${object.user_id.email_formatted | safe}</field>
             <field name="subject">Quotation Limit</field>
             <field name="body_html" type="html">
                 <div style="margin: 0px; padding: 0px; border:1px solid black;">
                     <p style="margin: 0px; padding: 0px; font-size: 13px;">
-                        Hello ${object.partner_id.email},
+                        Hello ${object.email},
                         <br/>
                         <br/>
                         This is to notify you that your <span>${ctx['message']}</span> limit has exceed for the ${object.name}.
@@ -17,7 +17,7 @@
                         <br/>
                         <ul>
                             <li>
-                                <b>Customer Name - </b><span>${object.partner_id.name}</span>
+                                <b>Customer Name - </b><span>${object.name}</span>
                             </li>
                             <li>
                                 <b>Limit for Customer -</b><span>${ctx['exceeding_amount']}</span>

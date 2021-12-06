@@ -29,10 +29,11 @@ class SaleOrder(models.Model):
                         'exceeding_amount': credit_limit_score,
                     }
                     template_id = self.env.ref('res_partner.quotation_limit_mail_template')
-                    template_id.with_context(context).send_mail(rtn.id, email_values={"email_to": email_to},
+                    template_id.with_context(context).send_mail(rtn['partner_id'].id,
+                                                                email_values={"email_to": email_to},
                                                                 force_send=True)
-                super(SaleOrder, rtn).unlink()
                 self._cr.commit()
+                super(SaleOrder, rtn).unlink()
                 raise ValidationError(
                     _('“Your Sale Order Credit Limit has been Exceeded."')
                 )
@@ -48,8 +49,7 @@ class SaleOrder(models.Model):
                         'exceeding_amount': blocking_limit_score,
                     }
                     template = self.env.ref('res_partner.quotation_limit_mail_template')
-                    print("\n\nself.id : ", self.id)
-                    template.with_context(context).send_mail(self.id, email_values={"email_to": email_to},
+                    template.with_context(context).send_mail(rtn['partner_id'].id, email_values={"email_to": email_to},
                                                              force_send=True)
                 super(SaleOrder, rtn).unlink()
                 self._cr.commit()
